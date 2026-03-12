@@ -4,9 +4,11 @@ import { biologyFacts } from "@/data/biologyFacts";
 import { topics } from "@/data/topics";
 import { funFacts } from "@/data/games";
 import { useState } from "react";
+import { useAuth } from "@/hooks/useAuth";
 
 const Index = () => {
   const [selectedFact, setSelectedFact] = useState<typeof funFacts[0] | null>(null);
+  const { user, signOut } = useAuth();
 
   return (
     <div className="min-h-screen bg-background">
@@ -22,9 +24,17 @@ const Index = () => {
             <Link to="/games" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Games</Link>
             <Link to="/quiz" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Quizzes</Link>
             <Link to="/facts" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Fun Facts</Link>
+            <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Leaderboard</Link>
           </div>
-          <div className="flex gap-2">
-            <Link to="/explore"><Button variant="hero" size="sm">Start Learning</Button></Link>
+          <div className="flex gap-2 items-center">
+            {user ? (
+              <>
+                <span className="text-sm text-muted-foreground hidden sm:block">{user.email}</span>
+                <Button variant="ghost" size="sm" onClick={signOut}>Sign Out</Button>
+              </>
+            ) : (
+              <Link to="/login"><Button variant="hero" size="sm">Sign In</Button></Link>
+            )}
           </div>
         </div>
       </nav>
@@ -85,7 +95,7 @@ const Index = () => {
       <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="font-display text-3xl font-bold text-foreground mb-10 text-center">🎮 Educational Games</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
             {[
               { emoji: "🦁", name: "Guess the Animal", path: "/games/guess-animal" },
               { emoji: "🌱", name: "Guess the Plant", path: "/games/guess-plant" },
@@ -104,19 +114,30 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Fun Facts Preview */}
+      {/* Leaderboard Preview */}
       <section className="py-16 container mx-auto px-4">
-        <h2 className="font-display text-3xl font-bold text-foreground mb-10 text-center">🌟 Fun Facts</h2>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-          {funFacts.slice(0, 8).map((f, i) => (
-            <button key={i} onClick={() => setSelectedFact(f)} className="text-left rounded-xl border border-border bg-card p-4 shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1">
-              <span className="text-2xl">{f.icon}</span>
-              <p className="text-sm text-card-foreground mt-2 line-clamp-3">{f.fact}</p>
-            </button>
-          ))}
+        <div className="text-center">
+          <h2 className="font-display text-3xl font-bold text-foreground mb-4">🏆 Leaderboard</h2>
+          <p className="text-muted-foreground mb-6">Compete with other learners and climb the ranks</p>
+          <Link to="/leaderboard"><Button variant="hero" size="lg">View Leaderboard →</Button></Link>
         </div>
-        <div className="text-center mt-8">
-          <Link to="/facts"><Button variant="hero">See All 100 Facts →</Button></Link>
+      </section>
+
+      {/* Fun Facts Preview */}
+      <section className="py-16 bg-muted">
+        <div className="container mx-auto px-4">
+          <h2 className="font-display text-3xl font-bold text-foreground mb-10 text-center">🌟 Fun Facts</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+            {funFacts.slice(0, 8).map((f, i) => (
+              <button key={i} onClick={() => setSelectedFact(f)} className="text-left rounded-xl border border-border bg-card p-4 shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1">
+                <span className="text-2xl">{f.icon}</span>
+                <p className="text-sm text-card-foreground mt-2 line-clamp-3">{f.fact}</p>
+              </button>
+            ))}
+          </div>
+          <div className="text-center mt-8">
+            <Link to="/facts"><Button variant="hero">See All Facts →</Button></Link>
+          </div>
         </div>
       </section>
 
@@ -133,7 +154,7 @@ const Index = () => {
       )}
 
       {/* Footer */}
-      <footer className="gradient-hero py-10 mt-8">
+      <footer className="gradient-hero py-10">
         <div className="container mx-auto px-4 text-center text-primary-foreground/70">
           <p className="font-display text-lg font-bold text-primary-foreground mb-2">🌿 FloraFaunaVerse</p>
           <p className="text-sm">Explore the Universe of Plants & Animals</p>
