@@ -15,6 +15,8 @@ import WordScrambleGame from "./pages/games/WordScrambleGame";
 import MemoryGame from "./pages/games/MemoryGame";
 import HangmanGame from "./pages/games/HangmanGame";
 import FactsPage from "./pages/FactsPage";
+import LoginPage from "./pages/LoginPage";
+import LeaderboardPage from "./pages/LeaderboardPage";
 
 const queryClient = new QueryClient();
 
@@ -26,6 +28,7 @@ const App = () => (
       <BrowserRouter>
         <Routes>
           <Route path="/" element={<Index />} />
+          <Route path="/login" element={<LoginPage />} />
           <Route path="/explore" element={<ExplorePage />} />
           <Route path="/topic/:id" element={<TopicPage />} />
           <Route path="/quiz" element={<QuizPage />} />
@@ -36,6 +39,7 @@ const App = () => (
           <Route path="/games/memory" element={<MemoryGame />} />
           <Route path="/games/hangman" element={<HangmanGame />} />
           <Route path="/facts" element={<FactsPage />} />
+          <Route path="/leaderboard" element={<LeaderboardPage />} />
           <Route path="*" element={<NotFound />} />
         </Routes>
       </BrowserRouter>

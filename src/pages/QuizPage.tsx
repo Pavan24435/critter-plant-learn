@@ -2,10 +2,13 @@ import { Link, useSearchParams } from "react-router-dom";
 import { quizQuestions, getQuestionsByTopic } from "@/data/quizQuestions";
 import { Button } from "@/components/ui/button";
 import { useState, useMemo } from "react";
+import { useAuth } from "@/hooks/useAuth";
+import { supabase } from "@/integrations/supabase/client";
 
 const QuizPage = () => {
   const [searchParams] = useSearchParams();
   const topicId = searchParams.get("topic");
+  const { user } = useAuth();
   const allQuestions = useMemo(() => {
     const qs = topicId ? getQuestionsByTopic(topicId) : quizQuestions;
     return [...qs].sort(() => Math.random() - 0.5).slice(0, 20);
@@ -16,7 +19,7 @@ const QuizPage = () => {
   const [score, setScore] = useState(0);
   const [showExplanation, setShowExplanation] = useState(false);
   const [finished, setFinished] = useState(false);
-  const [answers, setAnswers] = useState<boolean[]>([]);
+  const [saved, setSaved] = useState(false);
 
   if (allQuestions.length === 0) return (
     <div className="min-h-screen flex items-center justify-center bg-background">
@@ -34,13 +37,25 @@ const QuizPage = () => {
     if (selected !== null) return;
     setSelected(idx);
     setShowExplanation(true);
-    const correct = idx === q.correctAnswer;
-    if (correct) setScore(s => s + 1);
-    setAnswers(a => [...a, correct]);
+    if (idx === q.correctAnswer) setScore(s => s + 1);
   };
 
-  const handleNext = () => {
-    if (current + 1 >= allQuestions.length) { setFinished(true); return; }
+  const handleNext = async () => {
+    if (current + 1 >= allQuestions.length) {
+      setFinished(true);
+      // Save score to database
+      if (user && !saved) {
+        const finalScore = selected === q.correctAnswer ? score : score; // score already updated
+        await supabase.from("quiz_scores").insert({
+          user_id: user.id,
+          topic: topicId || "mixed",
+          score: selected === q.correctAnswer ? score : score,
+          total: allQuestions.length,
+        } as any);
+        setSaved(true);
+      }
+      return;
+    }
     setCurrent(c => c + 1);
     setSelected(null);
     setShowExplanation(false);
@@ -52,9 +67,12 @@ const QuizPage = () => {
         <span className="text-6xl block mb-4">{score / allQuestions.length >= 0.8 ? "🏆" : score / allQuestions.length >= 0.5 ? "👍" : "📚"}</span>
         <h1 className="font-display text-3xl font-bold text-foreground mb-2">Quiz Complete!</h1>
         <p className="text-4xl font-display font-bold text-primary mb-2">{score}/{allQuestions.length}</p>
-        <p className="text-muted-foreground mb-6">{score / allQuestions.length >= 0.8 ? "Excellent work!" : score / allQuestions.length >= 0.5 ? "Good effort!" : "Keep studying!"}</p>
-        <div className="flex gap-3 justify-center">
-          <Button variant="hero" onClick={() => { setCurrent(0); setSelected(null); setShowExplanation(false); setScore(0); setFinished(false); setAnswers([]); }}>Retry</Button>
+        <p className="text-muted-foreground mb-2">{score / allQuestions.length >= 0.8 ? "Excellent work!" : score / allQuestions.length >= 0.5 ? "Good effort!" : "Keep studying!"}</p>
+        {saved && <p className="text-xs text-primary mb-4">✅ Score saved to leaderboard!</p>}
+        {!user && <p className="text-xs text-muted-foreground mb-4"><Link to="/login" className="text-primary hover:underline">Sign in</Link> to save your scores</p>}
+        <div className="flex gap-3 justify-center flex-wrap">
+          <Button variant="hero" onClick={() => { setCurrent(0); setSelected(null); setShowExplanation(false); setScore(0); setFinished(false); setSaved(false); }}>Retry</Button>
+          <Link to="/leaderboard"><Button variant="game">Leaderboard</Button></Link>
           <Link to="/explore"><Button variant="outline">Explore Topics</Button></Link>
         </div>
       </div>
