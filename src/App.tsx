@@ -17,6 +17,9 @@ import HangmanGame from "./pages/games/HangmanGame";
 import FactsPage from "./pages/FactsPage";
 import LoginPage from "./pages/LoginPage";
 import LeaderboardPage from "./pages/LeaderboardPage";
+import ScientistsPage from "./pages/ScientistsPage";
+import TrueFalseGame from "./pages/games/TrueFalseGame";
+import MatchingGame from "./pages/games/MatchingGame";
 
 const queryClient = new QueryClient();
 
