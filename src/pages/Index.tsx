@@ -74,7 +74,7 @@ const Index = () => {
       {/* Featured Topics */}
       <section className="py-16 container mx-auto px-4">
         <h2 className="font-display text-3xl font-bold text-foreground mb-2 text-center">Explore Biology Topics</h2>
-        <p className="text-muted-foreground text-center mb-10">30+ topics across Botany, Zoology, and Animal Physiology</p>
+        <p className="text-muted-foreground text-center mb-10">59+ topics across Botany, Zoology, and Animal Physiology</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {topics.slice(0, 6).map(topic => (
             <Link key={topic.id} to={`/topic/${topic.id}`} className="group">
