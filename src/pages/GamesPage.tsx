@@ -8,6 +8,8 @@ const GamesPage = () => {
     { emoji: "🔤", name: "Word Scramble", desc: "Unscramble biology terms before time runs out", path: "/games/word-scramble", color: "gradient-ocean" },
     { emoji: "🃏", name: "Memory Cards", desc: "Match biology pairs in this memory game", path: "/games/memory", color: "gradient-nature" },
     { emoji: "💀", name: "Bio Hangman", desc: "Guess biology terms letter by letter", path: "/games/hangman", color: "gradient-sunset" },
+    { emoji: "✅", name: "True or False", desc: "Test your knowledge with true/false biology statements", path: "/games/true-false", color: "gradient-ocean" },
+    { emoji: "🎯", name: "Match Terms", desc: "Match biology terms with their definitions", path: "/games/matching", color: "gradient-nature" },
   ];
 
   return (

@@ -24,6 +24,7 @@ const Index = () => {
             <Link to="/games" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Games</Link>
             <Link to="/quiz" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Quizzes</Link>
             <Link to="/facts" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Fun Facts</Link>
+            <Link to="/scientists" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Scientists</Link>
             <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Leaderboard</Link>
           </div>
           <div className="flex gap-2 items-center">
@@ -73,7 +74,7 @@ const Index = () => {
       {/* Featured Topics */}
       <section className="py-16 container mx-auto px-4">
         <h2 className="font-display text-3xl font-bold text-foreground mb-2 text-center">Explore Biology Topics</h2>
-        <p className="text-muted-foreground text-center mb-10">30+ topics across Botany, Zoology, and Animal Physiology</p>
+        <p className="text-muted-foreground text-center mb-10">59+ topics across Botany, Zoology, and Animal Physiology</p>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {topics.slice(0, 6).map(topic => (
             <Link key={topic.id} to={`/topic/${topic.id}`} className="group">
@@ -95,13 +96,15 @@ const Index = () => {
       <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="font-display text-3xl font-bold text-foreground mb-10 text-center">🎮 Educational Games</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
               { emoji: "🦁", name: "Guess the Animal", path: "/games/guess-animal" },
               { emoji: "🌱", name: "Guess the Plant", path: "/games/guess-plant" },
               { emoji: "🔤", name: "Word Scramble", path: "/games/word-scramble" },
               { emoji: "🃏", name: "Memory Cards", path: "/games/memory" },
               { emoji: "💀", name: "Bio Hangman", path: "/games/hangman" },
+              { emoji: "✅", name: "True or False", path: "/games/true-false" },
+              { emoji: "🎯", name: "Match Terms", path: "/games/matching" },
             ].map(game => (
               <Link key={game.name} to={game.path} className="group">
                 <div className="rounded-xl border border-border bg-card p-5 text-center shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1">
