@@ -24,6 +24,7 @@ const Index = () => {
             <Link to="/games" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Games</Link>
             <Link to="/quiz" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Quizzes</Link>
             <Link to="/facts" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Fun Facts</Link>
+            <Link to="/scientists" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Scientists</Link>
             <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Leaderboard</Link>
           </div>
           <div className="flex gap-2 items-center">
