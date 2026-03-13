@@ -103,6 +103,8 @@ const Index = () => {
               { emoji: "🔤", name: "Word Scramble", path: "/games/word-scramble" },
               { emoji: "🃏", name: "Memory Cards", path: "/games/memory" },
               { emoji: "💀", name: "Bio Hangman", path: "/games/hangman" },
+              { emoji: "✅", name: "True or False", path: "/games/true-false" },
+              { emoji: "🎯", name: "Match Terms", path: "/games/matching" },
             ].map(game => (
               <Link key={game.name} to={game.path} className="group">
                 <div className="rounded-xl border border-border bg-card p-5 text-center shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1">
