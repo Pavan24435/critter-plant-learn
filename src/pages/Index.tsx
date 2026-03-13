@@ -96,7 +96,7 @@ const Index = () => {
       <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
           <h2 className="font-display text-3xl font-bold text-foreground mb-10 text-center">🎮 Educational Games</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-5 gap-4">
+          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
             {[
               { emoji: "🦁", name: "Guess the Animal", path: "/games/guess-animal" },
               { emoji: "🌱", name: "Guess the Plant", path: "/games/guess-plant" },
