@@ -95,6 +95,79 @@
     --sidebar-border: 150 15% 18%;
     --sidebar-ring: 152 50% 45%;
   }
+
+  /* Custom Themes */
+  .theme-plants {
+    --background: 130 25% 96%;
+    --foreground: 140 40% 10%;
+    --card: 130 20% 99%;
+    --card-foreground: 140 40% 10%;
+    --primary: 140 60% 30%;
+    --primary-foreground: 80 70% 96%;
+    --secondary: 80 50% 50%;
+    --secondary-foreground: 80 50% 10%;
+    --muted: 130 20% 91%;
+    --muted-foreground: 140 15% 40%;
+    --accent: 130 35% 88%;
+    --accent-foreground: 140 60% 20%;
+    --border: 130 20% 85%;
+    --input: 130 20% 85%;
+    --ring: 140 60% 30%;
+  }
+
+  .theme-animals {
+    --background: 30 25% 97%;
+    --foreground: 25 40% 12%;
+    --card: 30 20% 100%;
+    --card-foreground: 25 40% 12%;
+    --primary: 25 70% 40%;
+    --primary-foreground: 40 80% 96%;
+    --secondary: 40 65% 55%;
+    --secondary-foreground: 25 50% 12%;
+    --muted: 30 20% 92%;
+    --muted-foreground: 25 15% 45%;
+    --accent: 35 40% 88%;
+    --accent-foreground: 25 70% 28%;
+    --border: 30 20% 86%;
+    --input: 30 20% 86%;
+    --ring: 25 70% 40%;
+  }
+
+  .theme-ocean {
+    --background: 200 25% 97%;
+    --foreground: 210 40% 10%;
+    --card: 200 20% 100%;
+    --card-foreground: 210 40% 10%;
+    --primary: 200 70% 40%;
+    --primary-foreground: 200 80% 97%;
+    --secondary: 180 50% 45%;
+    --secondary-foreground: 180 50% 10%;
+    --muted: 200 20% 92%;
+    --muted-foreground: 210 15% 45%;
+    --accent: 195 35% 88%;
+    --accent-foreground: 200 70% 28%;
+    --border: 200 20% 86%;
+    --input: 200 20% 86%;
+    --ring: 200 70% 40%;
+  }
+
+  .theme-butterflies {
+    --background: 290 20% 97%;
+    --foreground: 280 30% 12%;
+    --card: 290 15% 100%;
+    --card-foreground: 280 30% 12%;
+    --primary: 280 55% 50%;
+    --primary-foreground: 290 80% 97%;
+    --secondary: 330 60% 55%;
+    --secondary-foreground: 330 50% 10%;
+    --muted: 290 15% 92%;
+    --muted-foreground: 280 10% 45%;
+    --accent: 300 30% 90%;
+    --accent-foreground: 280 55% 35%;
+    --border: 290 15% 86%;
+    --input: 290 15% 86%;
+    --ring: 280 55% 50%;
+  }
 }
 
 @layer base {

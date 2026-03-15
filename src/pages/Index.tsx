@@ -4,144 +4,113 @@ import { biologyFacts } from "@/data/biologyFacts";
 import { topics } from "@/data/topics";
 import { funFacts } from "@/data/games";
 import { useState } from "react";
-import { useAuth } from "@/hooks/useAuth";
+import Navbar from "@/components/Navbar";
+
+const sections = [
+  { icon: "📚", title: "Explore Topics", desc: "59+ topics across Botany, Zoology, Physiology", path: "/explore" },
+  { icon: "🎮", title: "Games", desc: "7 interactive educational games", path: "/games" },
+  { icon: "🧩", title: "Puzzle Zone", desc: "Food chains, organ matching, crosswords", path: "/puzzle-zone" },
+  { icon: "🧠", title: "Mind Maps", desc: "Visual mind maps for every topic", path: "/mind-maps" },
+  { icon: "📊", title: "Flowcharts", desc: "Process, classification & cycle charts", path: "/flowcharts" },
+  { icon: "🐾", title: "Species Explorer", desc: "Discover 24+ fascinating species", path: "/species-explorer" },
+  { icon: "🌍", title: "Ecosystem Explorer", desc: "12 major ecosystems explored", path: "/ecosystem-explorer" },
+  { icon: "🎓", title: "Exam Preparation", desc: "Study guides & practice questions", path: "/exam-prep" },
+  { icon: "📖", title: "Biology Glossary", desc: "95+ essential biology terms", path: "/glossary" },
+  { icon: "👩‍🔬", title: "Scientist Spotlight", desc: "50+ pioneering biologists", path: "/scientists" },
+  { icon: "🔊", title: "Animal Sounds", desc: "Learn how animals communicate", path: "/animal-sounds" },
+  { icon: "🏅", title: "Biology Challenges", desc: "Speed, streak & accuracy challenges", path: "/challenges" },
+  { icon: "📥", title: "Download Center", desc: "Download notes for offline study", path: "/download-center" },
+  { icon: "📊", title: "Dashboard", desc: "Track your learning progress", path: "/dashboard" },
+  { icon: "🏆", title: "Leaderboard", desc: "Compete with other learners", path: "/leaderboard" },
+  { icon: "🤖", title: "AI Study Assistant", desc: "Personalized AI-powered tutor", path: "/ai-assistant" },
+];
 
 const Index = () => {
   const [selectedFact, setSelectedFact] = useState<typeof funFacts[0] | null>(null);
-  const { user, signOut } = useAuth();
 
   return (
     <div className="min-h-screen bg-background">
-      {/* Navbar */}
-      <nav className="sticky top-0 z-50 border-b border-border bg-background/95 backdrop-blur">
-        <div className="container mx-auto flex items-center justify-between px-4 py-3">
-          <Link to="/" className="flex items-center gap-2">
-            <span className="text-2xl">🌿</span>
-            <span className="font-display text-xl font-bold text-primary">FloraFaunaVerse</span>
-          </Link>
-          <div className="hidden md:flex items-center gap-6">
-            <Link to="/explore" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Explore</Link>
-            <Link to="/games" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Games</Link>
-            <Link to="/quiz" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Quizzes</Link>
-            <Link to="/facts" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Fun Facts</Link>
-            <Link to="/scientists" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Scientists</Link>
-            <Link to="/leaderboard" className="text-sm font-medium text-muted-foreground hover:text-primary transition-colors">Leaderboard</Link>
-          </div>
-          <div className="flex gap-2 items-center">
-            {user ? (
-              <>
-                <span className="text-sm text-muted-foreground hidden sm:block">{user.email}</span>
-                <Button variant="ghost" size="sm" onClick={signOut}>Sign Out</Button>
-              </>
-            ) : (
-              <Link to="/login"><Button variant="hero" size="sm">Sign In</Button></Link>
-            )}
-          </div>
-        </div>
-      </nav>
+      <Navbar />
 
       {/* Hero */}
-      <section className="gradient-hero py-20 md:py-32">
+      <section className="gradient-hero py-20 md:py-28">
         <div className="container mx-auto px-4 text-center">
           <div className="animate-slide-up">
             <span className="text-6xl mb-4 block animate-float">🌍</span>
-            <h1 className="font-display text-4xl md:text-6xl font-extrabold text-primary-foreground mb-4">
-              FloraFaunaVerse
-            </h1>
+            <h1 className="font-display text-4xl md:text-6xl font-extrabold text-primary-foreground mb-4">FloraFaunaVerse</h1>
             <p className="text-lg md:text-xl text-primary-foreground/80 mb-8 max-w-2xl mx-auto">
-              Explore the Universe of Plants & Animals — Learn biology through interactive games, quizzes, flowcharts, and AI-powered study tools.
+              The Ultimate Biology Learning Platform — Topics, Games, Puzzles, AI Tutor, Mind Maps, Flowcharts & More!
             </p>
-            <div className="flex gap-4 justify-center flex-wrap">
-              <Link to="/explore"><Button variant="game" size="lg">🔬 Explore Topics</Button></Link>
-              <Link to="/games"><Button variant="ocean" size="lg">🎮 Play Games</Button></Link>
-              <Link to="/quiz"><Button variant="outline" size="lg" className="bg-primary-foreground/10 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/20">📝 Take Quiz</Button></Link>
+            <div className="flex gap-3 justify-center flex-wrap">
+              <Link to="/explore"><Button variant="game" size="lg">🔬 Explore</Button></Link>
+              <Link to="/games"><Button variant="ocean" size="lg">🎮 Games</Button></Link>
+              <Link to="/ai-assistant"><Button variant="outline" size="lg" className="bg-primary-foreground/10 border-primary-foreground/30 text-primary-foreground hover:bg-primary-foreground/20">🤖 AI Tutor</Button></Link>
+              <Link to="/puzzle-zone"><Button variant="game" size="lg">🧩 Puzzles</Button></Link>
             </div>
           </div>
         </div>
       </section>
 
-      {/* Scrolling Facts Banner */}
+      {/* Scrolling Facts */}
       <section className="bg-secondary py-3 overflow-hidden border-y border-border">
         <div className="facts-scroll flex gap-8 whitespace-nowrap">
           {[...biologyFacts, ...biologyFacts].map((fact, i) => (
-            <span key={i} className="text-sm text-secondary-foreground/80 flex-shrink-0">
-              🧬 {fact}
-            </span>
+            <span key={i} className="text-sm text-secondary-foreground/80 flex-shrink-0">🧬 {fact}</span>
+          ))}
+        </div>
+      </section>
+
+      {/* All Sections Grid */}
+      <section className="py-16 container mx-auto px-4">
+        <h2 className="font-display text-3xl font-bold text-foreground mb-2 text-center">🌿 Everything You Need</h2>
+        <p className="text-muted-foreground text-center mb-10">16 powerful learning modules at your fingertips</p>
+        <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
+          {sections.map(s => (
+            <Link key={s.path} to={s.path} className="group">
+              <div className="rounded-xl border border-border bg-card p-5 text-center shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1 h-full">
+                <span className="text-4xl block mb-2">{s.icon}</span>
+                <h3 className="font-display text-sm font-bold text-card-foreground mb-1">{s.title}</h3>
+                <p className="text-xs text-muted-foreground">{s.desc}</p>
+              </div>
+            </Link>
           ))}
         </div>
       </section>
 
       {/* Featured Topics */}
-      <section className="py-16 container mx-auto px-4">
-        <h2 className="font-display text-3xl font-bold text-foreground mb-2 text-center">Explore Biology Topics</h2>
-        <p className="text-muted-foreground text-center mb-10">59+ topics across Botany, Zoology, and Animal Physiology</p>
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
-          {topics.slice(0, 6).map(topic => (
-            <Link key={topic.id} to={`/topic/${topic.id}`} className="group">
-              <div className="rounded-xl border border-border bg-card p-6 shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1">
-                <span className="text-4xl mb-3 block">{topic.icon}</span>
-                <h3 className="font-display text-lg font-semibold text-card-foreground mb-1">{topic.title}</h3>
-                <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-accent text-accent-foreground capitalize">{topic.category}</span>
-                <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{topic.description}</p>
-              </div>
-            </Link>
-          ))}
-        </div>
-        <div className="text-center mt-8">
-          <Link to="/explore"><Button variant="hero" size="lg">View All Topics →</Button></Link>
-        </div>
-      </section>
-
-      {/* Games Preview */}
       <section className="py-16 bg-muted">
         <div className="container mx-auto px-4">
-          <h2 className="font-display text-3xl font-bold text-foreground mb-10 text-center">🎮 Educational Games</h2>
-          <div className="grid grid-cols-2 sm:grid-cols-3 lg:grid-cols-4 gap-4">
-            {[
-              { emoji: "🦁", name: "Guess the Animal", path: "/games/guess-animal" },
-              { emoji: "🌱", name: "Guess the Plant", path: "/games/guess-plant" },
-              { emoji: "🔤", name: "Word Scramble", path: "/games/word-scramble" },
-              { emoji: "🃏", name: "Memory Cards", path: "/games/memory" },
-              { emoji: "💀", name: "Bio Hangman", path: "/games/hangman" },
-              { emoji: "✅", name: "True or False", path: "/games/true-false" },
-              { emoji: "🎯", name: "Match Terms", path: "/games/matching" },
-            ].map(game => (
-              <Link key={game.name} to={game.path} className="group">
-                <div className="rounded-xl border border-border bg-card p-5 text-center shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1">
-                  <span className="text-5xl block mb-3">{game.emoji}</span>
-                  <h3 className="font-display text-sm font-semibold text-card-foreground">{game.name}</h3>
+          <h2 className="font-display text-3xl font-bold text-foreground mb-10 text-center">📚 Featured Topics</h2>
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+            {topics.slice(0, 6).map(topic => (
+              <Link key={topic.id} to={`/topic/${topic.id}`} className="group">
+                <div className="rounded-xl border border-border bg-card p-6 shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1">
+                  <span className="text-4xl mb-3 block">{topic.icon}</span>
+                  <h3 className="font-display text-lg font-semibold text-card-foreground mb-1">{topic.title}</h3>
+                  <span className="text-xs font-medium px-2 py-0.5 rounded-full bg-accent text-accent-foreground capitalize">{topic.category}</span>
+                  <p className="text-sm text-muted-foreground mt-2 line-clamp-2">{topic.description}</p>
                 </div>
               </Link>
             ))}
           </div>
-        </div>
-      </section>
-
-      {/* Leaderboard Preview */}
-      <section className="py-16 container mx-auto px-4">
-        <div className="text-center">
-          <h2 className="font-display text-3xl font-bold text-foreground mb-4">🏆 Leaderboard</h2>
-          <p className="text-muted-foreground mb-6">Compete with other learners and climb the ranks</p>
-          <Link to="/leaderboard"><Button variant="hero" size="lg">View Leaderboard →</Button></Link>
-        </div>
-      </section>
-
-      {/* Fun Facts Preview */}
-      <section className="py-16 bg-muted">
-        <div className="container mx-auto px-4">
-          <h2 className="font-display text-3xl font-bold text-foreground mb-10 text-center">🌟 Fun Facts</h2>
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
-            {funFacts.slice(0, 8).map((f, i) => (
-              <button key={i} onClick={() => setSelectedFact(f)} className="text-left rounded-xl border border-border bg-card p-4 shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1">
-                <span className="text-2xl">{f.icon}</span>
-                <p className="text-sm text-card-foreground mt-2 line-clamp-3">{f.fact}</p>
-              </button>
-            ))}
-          </div>
           <div className="text-center mt-8">
-            <Link to="/facts"><Button variant="hero">See All Facts →</Button></Link>
+            <Link to="/explore"><Button variant="hero" size="lg">View All Topics →</Button></Link>
           </div>
         </div>
+      </section>
+
+      {/* Fun Facts */}
+      <section className="py-16 container mx-auto px-4">
+        <h2 className="font-display text-3xl font-bold text-foreground mb-10 text-center">🌟 Fun Facts</h2>
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+          {funFacts.slice(0, 8).map((f, i) => (
+            <button key={i} onClick={() => setSelectedFact(f)} className="text-left rounded-xl border border-border bg-card p-4 shadow-card hover:shadow-soft transition-all duration-300 hover:-translate-y-1">
+              <span className="text-2xl">{f.icon}</span>
+              <p className="text-sm text-card-foreground mt-2 line-clamp-3">{f.fact}</p>
+            </button>
+          ))}
+        </div>
+        <div className="text-center mt-8"><Link to="/facts"><Button variant="hero">See All Facts →</Button></Link></div>
       </section>
 
       {/* Fact Modal */}
@@ -160,7 +129,7 @@ const Index = () => {
       <footer className="gradient-hero py-10">
         <div className="container mx-auto px-4 text-center text-primary-foreground/70">
           <p className="font-display text-lg font-bold text-primary-foreground mb-2">🌿 FloraFaunaVerse</p>
-          <p className="text-sm">Explore the Universe of Plants & Animals</p>
+          <p className="text-sm">The Ultimate Biology Learning Platform</p>
           <p className="text-xs mt-4">© 2026 FloraFaunaVerse. Built for biology learners everywhere.</p>
         </div>
       </footer>
