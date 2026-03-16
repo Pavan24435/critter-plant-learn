@@ -1,7 +1,7 @@
 export interface Topic {
   id: string;
   title: string;
-  category: "botany" | "zoology" | "physiology";
+  category: "botany" | "zoology" | "physiology" | "genetics" | "biotechnology" | "ecology" | "reproduction";
   difficulty: "beginner" | "intermediate" | "advanced";
   icon: string;
   description: string;
