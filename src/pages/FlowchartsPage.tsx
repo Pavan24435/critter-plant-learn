@@ -7,7 +7,7 @@ const FlowchartsPage = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("all");
   const [speaking, setSpeaking] = useState(false);
 
-  const categories = ["all", "botany", "zoology", "physiology"];
+  const categories = ["all", "botany", "zoology", "physiology", "reproduction", "genetics", "biotechnology", "ecology"];
   const filtered = selectedCategory === "all" ? topics : topics.filter(t => t.category === selectedCategory);
   const topicsWithFlowcharts = filtered.filter(t => t.flowcharts && t.flowcharts.length > 0);
 

@@ -1,5 +1,5 @@
 import Navbar from "@/components/Navbar";
-import { topics } from "@/data/topics";
+import { topics, Topic } from "@/data/topics";
 import { useState } from "react";
 import { quizQuestions } from "@/data/quizQuestions";
 
