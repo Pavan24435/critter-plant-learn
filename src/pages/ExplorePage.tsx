@@ -25,7 +25,7 @@ const ExplorePage = () => {
         <p className="text-muted-foreground mb-6">Browse {topics.length} biology topics</p>
         <div className="flex flex-wrap gap-3 mb-6">
           <input value={search} onChange={e => setSearch(e.target.value)} placeholder="Search topics..." className="flex-1 min-w-[200px] px-4 py-2 rounded-lg border border-input bg-background text-foreground text-sm" />
-          {["all","botany","zoology","physiology"].map(f => (
+          {["all","botany","zoology","physiology","reproduction","genetics","biotechnology","ecology"].map(f => (
             <Button key={f} variant={filter === f ? "hero" : "outline"} size="sm" onClick={() => setFilter(f)} className="capitalize">{f === "all" ? "All Topics" : f}</Button>
           ))}
         </div>
