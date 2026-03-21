@@ -4,6 +4,7 @@ import { getQuestionsByTopic } from "@/data/quizQuestions";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import FlowchartViewer from "@/components/FlowchartViewer";
+import KeyPointChip from "@/components/KeyPointChip";
 
 const TopicPage = () => {
   const { id } = useParams();
