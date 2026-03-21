@@ -4,6 +4,7 @@ import { getQuestionsByTopic } from "@/data/quizQuestions";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 import FlowchartViewer from "@/components/FlowchartViewer";
+import KeyPointChip from "@/components/KeyPointChip";
 
 const TopicPage = () => {
   const { id } = useParams();
@@ -154,7 +155,7 @@ const TopicPage = () => {
           <h3 className="font-display text-lg font-semibold text-accent-foreground mb-3">🎯 Key Points</h3>
           <div className="flex flex-wrap gap-2">
             {topic.keyPoints.map((kp, i) => (
-              <span key={i} className="px-3 py-1 rounded-full bg-card text-card-foreground text-sm border border-border">{kp}</span>
+              <KeyPointChip key={i} label={kp} />
             ))}
           </div>
         </div>

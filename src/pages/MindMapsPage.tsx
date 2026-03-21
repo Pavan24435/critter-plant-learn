@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { topics } from "@/data/topics";
 import { useState } from "react";
+import KeyPointChip from "@/components/KeyPointChip";
 
 const MindMapsPage = () => {
   const [selectedTopic, setSelectedTopic] = useState(topics[0]);
@@ -95,7 +96,7 @@ const MindMapsPage = () => {
             <h3 className="font-display font-bold text-foreground mb-3">📖 Key Concepts</h3>
             <div className="flex flex-wrap gap-2">
               {selectedTopic.keyPoints.map((kp, i) => (
-                <span key={i} className="px-3 py-1 rounded-full bg-accent text-accent-foreground text-xs">{kp}</span>
+                <KeyPointChip key={i} label={kp} />
               ))}
             </div>
           </div>
