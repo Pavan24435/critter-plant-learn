@@ -1,6 +1,7 @@
 import Navbar from "@/components/Navbar";
 import { topics } from "@/data/topics";
 import { useState } from "react";
+import KeyPointChip from "@/components/KeyPointChip";
 
 const MindMapsPage = () => {
   const [selectedTopic, setSelectedTopic] = useState(topics[0]);
